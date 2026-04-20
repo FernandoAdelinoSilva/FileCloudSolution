@@ -15,8 +15,8 @@ A simple in-memory cloud storage system that maps files to their metadata (name,
   - Display the largest file - endpoint GetLargestFile ✅
 
 - **Level 3**
-  - Add users with limited capacity
-  - Show All files for each user
+  - Add users with limited capacity ✅
+  - Show All files for each user ✅
 
 ---
 
