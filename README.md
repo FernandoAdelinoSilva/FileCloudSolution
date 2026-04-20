@@ -1,25 +1,61 @@
-# FileCloudSolution
-Cloud Storage System
+# ☁️ Cloud Storage System
 
-Your task is to implement a simple cloud storage system that maps objects(files) to their metainformation.
+A simple in-memory cloud storage system that maps files to their metadata (name, size, etc.).
 
-Specifically, the storage should maintain files and information about them (name, size etc). Note that this system should be in-memory.
+---
 
-Level 1: The cloud storage system should support adding a new file and retrieving and deleting files.
+## 📌 Levels of Functionality
 
-Level 2: the cloud storage sys should support displaying the largest file
+- **Level 1**
+  - Add new files
+  - Retrieve files
+  - Delete files
 
-Level 3: the cloud storage system should support adding users with limited capacities and merging two users
+- **Level 2**
+  - Display the largest file
 
-level 4: the cloud storage system should support backing up and restoring users files
+- **Level 3**
+  - Add users with limited capacity
+  - Merge two users
 
-===========================================================================================
+- **Level 4**
+  - Backup and restore user files
 
-Features - C# Backend API
-    - Endpoints with operations:
-        - Get All Files
-        - Get File By Name
-        - Add File - Validation if file already exists and throw exception
-    - Singleton Repository Files 
-    - Unit Tests to validate operations
-    - CICD - Build solution and run unit tests
+---
+
+## 🚀 Features
+
+- **C# Backend API**
+  - Endpoints:
+    - Get All Files
+    - Get File By Name
+    - Add File (with validation and exception if file already exists)
+  - Singleton repository for files
+- **Unit Tests**
+  - Validate core operations
+- **CI/CD**
+  - Build solution
+  - Run unit tests with GitHub Actions
+
+---
+
+## 🛠️ Tech Stack
+
+- .NET 8
+- ASP.NET Core Web API
+- xUnit + Moq (unit testing)
+- GitHub Actions (CI/CD)
+
+---
+
+## ▶️ How to Run
+
+```bash
+# Restore dependencies
+dotnet restore
+
+# Build solution
+dotnet build
+
+# Run unit tests
+dotnet test
