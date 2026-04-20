@@ -5,6 +5,8 @@ VisualStudioVersion = 17.10.34916.146
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileCloudSolution", "FileCloudSolution\FileCloudSolution.csproj", "{006C33F2-AD09-4B58-8534-A9401551018E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileCloudSolutionTests", "FileCloudSolutionTests\FileCloudSolutionTests.csproj", "{DDAEDA60-CF09-4983-8D2D-6AED209D1BAD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{006C33F2-AD09-4B58-8534-A9401551018E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{006C33F2-AD09-4B58-8534-A9401551018E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{006C33F2-AD09-4B58-8534-A9401551018E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDAEDA60-CF09-4983-8D2D-6AED209D1BAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDAEDA60-CF09-4983-8D2D-6AED209D1BAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDAEDA60-CF09-4983-8D2D-6AED209D1BAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDAEDA60-CF09-4983-8D2D-6AED209D1BAD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

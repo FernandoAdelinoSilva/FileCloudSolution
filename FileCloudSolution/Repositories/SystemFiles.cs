@@ -1,9 +1,10 @@
-﻿using FileCloudSolution.Models;
+﻿using FileCloudSolution.Interfaces;
+using FileCloudSolution.Models;
 using System.Drawing;
 
 namespace FileCloudSolution.Repositories;
 
-public class SystemFiles
+public class SystemFiles : ISystemFiles
 {
     private List<SystemFile> _systemFiles { get; set; } = new List<SystemFile>();
 

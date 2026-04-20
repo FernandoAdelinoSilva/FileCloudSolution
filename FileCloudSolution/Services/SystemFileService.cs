@@ -1,15 +1,15 @@
 ﻿using FileCloudSolution.DTOs;
 using FileCloudSolution.Interfaces;
 using FileCloudSolution.Models;
-using FileCloudSolution.Repositories;
 
 namespace FileCloudSolution.Services;
 
 public class SystemFileService : ISystemFileService
 {
-    private readonly SystemFiles _repository;
 
-    public SystemFileService(SystemFiles repository)
+    private readonly ISystemFiles _repository;
+
+    public SystemFileService(ISystemFiles repository)
     {
         _repository = repository;
     }

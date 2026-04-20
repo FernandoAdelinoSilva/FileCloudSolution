@@ -9,6 +9,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<SystemFiles>();
+builder.Services.AddScoped<ISystemFiles, SystemFiles>();
 builder.Services.AddScoped<ISystemFileService, SystemFileService>();
 
 var app = builder.Build();
