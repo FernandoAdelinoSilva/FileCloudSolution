@@ -26,6 +26,17 @@ public class CloudFilesController : Controller
         return Ok(files);
     }
 
+    [HttpGet("{name}")]
+    public ActionResult<List<SystemFile>> GetByName([FromRoute] string name)
+    {
+        var file = _systemFileService.GetFileByName(name);
+
+        if (file == null)
+            return NotFound($"File '{name}' not found.");
+
+        return Ok(file);
+    }
+
     [HttpPost(Name = "AddFile")]
     public ActionResult<SystemFileDTO> Add(SystemFileDTO systemFile)
     {
