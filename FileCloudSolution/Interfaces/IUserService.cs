@@ -1,7 +1,11 @@
-﻿namespace FileCloudSolution.Interfaces;
+﻿using FileCloudSolution.DTOs;
+using FileCloudSolution.Models;
+
+namespace FileCloudSolution.Interfaces;
 
 public interface IUserService
 {
-    void AddUser(string username, int capacity);
+    List<User> GetAllUsers();
+    UserDTO AddUser(UserDTO user);
     bool RemoveUser(string name);
 }

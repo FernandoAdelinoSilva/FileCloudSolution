@@ -19,6 +19,10 @@ builder.Services.AddSingleton<CloudStorageRepository>();
 builder.Services.AddSingleton<ICloudStorageRepository, CloudStorageRepository>();
 builder.Services.AddScoped<ICloudStorageService, CloudStorageService>();
 
+builder.Services.AddSingleton<UserRepository>();
+builder.Services.AddSingleton<IUserRepository, UserRepository>();
+builder.Services.AddSingleton<IUserService, UserService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -1,4 +1,6 @@
-﻿using FileCloudSolution.Interfaces;
+﻿using FileCloudSolution.DTOs;
+using FileCloudSolution.Interfaces;
+using FileCloudSolution.Models;
 
 namespace FileCloudSolution.Services;
 
@@ -12,9 +14,15 @@ public class UserService : IUserService
         _repository = repository;
     }
 
-    public void AddUser(string username, int capacity)
+    public List<User> GetAllUsers()
     {
-        _repository.AddUser(username, capacity);
+        return _repository.GetAllUsers();
+    }
+
+    public UserDTO AddUser(UserDTO user)
+    {
+        _repository.AddUser(user.Name, user.Capacity);
+        return user;
     }
 
     public bool RemoveUser(string name)

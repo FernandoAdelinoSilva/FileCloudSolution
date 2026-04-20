@@ -7,6 +7,11 @@ public class UserRepository : IUserRepository
 {
     private List<User> _users { get; set; } = new List<User>();
 
+    public List<User> GetAllUsers()
+    {
+        return _users;
+    }
+
     public bool AddUser(string name, int capacity)
     {
         var user = new User(name, capacity);
