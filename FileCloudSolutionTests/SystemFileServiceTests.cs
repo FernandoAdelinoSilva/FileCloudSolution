@@ -129,4 +129,41 @@ public class SystemFileServiceTests
         Assert.False(result);
         repoMock.Verify(r => r.Remove("file1"), Times.Once);
     }
+
+    [Fact]
+    public void GetLargestFile_ShouldReturnFile_WhenFilesExist()
+    {
+        // Arrange
+        var largestFile = new SystemFile("bigfile.txt", 500);
+        var repoMock = new Mock<ISystemFiles>();
+        repoMock.Setup(r => r.GetLargestFile()).Returns(largestFile);
+
+        var service = new SystemFileService(repoMock.Object);
+
+        // Act
+        var result = service.GetLargestFile();
+
+        // Assert
+        Assert.NotNull(result);
+        Assert.Equal("bigfile.txt", result.Name);
+        Assert.Equal(500, result.Size);
+        repoMock.Verify(r => r.GetLargestFile(), Times.Once);
+    }
+
+    [Fact]
+    public void GetLargestFile_ShouldReturnNull_WhenNoFilesExist()
+    {
+        // Arrange
+        var repoMock = new Mock<ISystemFiles>();
+        repoMock.Setup(r => r.GetLargestFile()).Returns((SystemFile?)null);
+
+        var service = new SystemFileService(repoMock.Object);
+
+        // Act
+        var result = service.GetLargestFile();
+
+        // Assert
+        Assert.Null(result);
+        repoMock.Verify(r => r.GetLargestFile(), Times.Once);
+    }
 }

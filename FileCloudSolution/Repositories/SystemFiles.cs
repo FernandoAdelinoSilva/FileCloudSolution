@@ -35,4 +35,9 @@ public class SystemFiles : ISystemFiles
     {
         return _systemFiles.FirstOrDefault(f => f.Name.Equals(fileName));
     }
+
+    public SystemFile? GetLargestFile()
+    {
+        return _systemFiles.OrderByDescending(f => f.Size).FirstOrDefault();
+    }
 }

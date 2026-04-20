@@ -39,6 +39,11 @@ public class SystemFileService : ISystemFileService
         return _repository.GetByName(fileName);
     }
 
+    public SystemFile? GetLargestFile()
+    {
+        return _repository.GetLargestFile();
+    }
+
     public bool Delete(string fileName)
     {
         return _repository.Remove(fileName);

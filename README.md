@@ -7,19 +7,16 @@ A simple in-memory cloud storage system that maps files to their metadata (name,
 ## 📌 Levels of Functionality
 
 - **Level 1**
-  - Add new files
-  - Retrieve files
-  - Delete files
+  - Add new files - endpoint AddFile ✅
+  - Retrieve files - endpoint GetAllFiles ✅
+  - Delete files - endpoint DeleteFile ✅
 
 - **Level 2**
-  - Display the largest file
+  - Display the largest file - endpoint GetLargestFile ✅
 
 - **Level 3**
   - Add users with limited capacity
-  - Merge two users
-
-- **Level 4**
-  - Backup and restore user files
+  - Show All files for each user
 
 ---
 
@@ -29,7 +26,9 @@ A simple in-memory cloud storage system that maps files to their metadata (name,
   - Endpoints:
     - Get All Files
     - Get File By Name
+    - Get Largest File
     - Add File (with validation and exception if file already exists)
+    - Remove File
   - Singleton repository for files
 - **Unit Tests**
   - Validate core operations

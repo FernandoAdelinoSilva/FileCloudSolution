@@ -37,6 +37,17 @@ public class CloudFilesController : Controller
         return Ok(file);
     }
 
+    [HttpGet("largest")]
+    public ActionResult<SystemFile> GetLargestFile()
+    {
+        var file = _systemFileService.GetLargestFile();
+
+        if (file == null)
+            return NotFound("No files found.");
+
+        return Ok(file);
+    }
+
     [HttpPost(Name = "AddFile")]
     public ActionResult<SystemFileDTO> Add(SystemFileDTO systemFile)
     {

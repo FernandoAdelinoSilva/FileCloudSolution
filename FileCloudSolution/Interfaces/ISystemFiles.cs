@@ -8,4 +8,5 @@ public interface ISystemFiles
     bool Remove(string fileName);
     List<SystemFile> GetAll();
     SystemFile GetByName(string fileName);
+    SystemFile GetLargestFile();
 }

@@ -8,6 +8,7 @@ public interface ISystemFileService
     void AddFile(string fileName, int size);
     SystemFileDTO AddFile(SystemFileDTO systemFile);
     SystemFile? GetFileByName(string fileName);
+    SystemFile? GetLargestFile();
     List<SystemFile> GetAllFiles();
     bool Delete(string fileName);
 }
