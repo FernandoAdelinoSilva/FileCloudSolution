@@ -1,0 +1,6 @@
+@FileCloudSolution_HostAddress = http://localhost:5098
+
+GET {{FileCloudSolution_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
