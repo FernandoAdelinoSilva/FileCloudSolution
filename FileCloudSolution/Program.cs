@@ -8,7 +8,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<SystemFiles>();
+builder.Services.AddSingleton<SystemFiles>();
 builder.Services.AddScoped<ISystemFileService, SystemFileService>();
 
 var app = builder.Build();

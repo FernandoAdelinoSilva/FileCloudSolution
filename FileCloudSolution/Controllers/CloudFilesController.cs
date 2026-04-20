@@ -1,4 +1,5 @@
-﻿using FileCloudSolution.Interfaces;
+﻿using FileCloudSolution.DTOs;
+using FileCloudSolution.Interfaces;
 using FileCloudSolution.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,10 +19,28 @@ public class CloudFilesController : Controller
     }
 
     [HttpGet(Name = "GetAllFiles")]
-    public List<SystemFile> Get()
+    public ActionResult<List<SystemFile>> Get()
     {
-        _systemFileService.AddFile("test", 1);
-        return _systemFileService.GetAllFiles();
+        var files = _systemFileService.GetAllFiles();
+
+        return Ok(files);
+    }
+
+    [HttpPost(Name = "AddFile")]
+    public ActionResult<SystemFileDTO> Add(SystemFileDTO systemFile)
+    {
+        if (systemFile == null)
+        {
+            return BadRequest("Please provide a valid File");
+        }
+
+        var createdFile = _systemFileService.AddFile(systemFile);
+
+        return CreatedAtAction(
+            nameof(Get),
+            new { fileName = createdFile.Name },
+            createdFile
+        );
     }
 }
 

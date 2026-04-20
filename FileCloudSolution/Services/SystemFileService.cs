@@ -1,4 +1,5 @@
-﻿using FileCloudSolution.Interfaces;
+﻿using FileCloudSolution.DTOs;
+using FileCloudSolution.Interfaces;
 using FileCloudSolution.Models;
 using FileCloudSolution.Repositories;
 
@@ -16,6 +17,11 @@ public class SystemFileService : ISystemFileService
     public void AddFile(string fileName, int size)
     {
         _repository.Add(fileName, size);
+    }
+    public SystemFileDTO AddFile(SystemFileDTO systemFile)
+    {
+        _repository.Add(systemFile.Name, systemFile.Size);
+        return systemFile;
     }
 
     public List<SystemFile> GetAllFiles()
