@@ -2,7 +2,7 @@
 
 namespace FileCloudSolution.Interfaces;
 
-public interface ICloudStorage
+public interface ICloudStorageRepository
 {
     void AddFile(string fileName, int size);
     bool RemoveFile(string fileName);

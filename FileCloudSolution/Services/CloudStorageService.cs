@@ -7,9 +7,9 @@ namespace FileCloudSolution.Services;
 public class CloudStorageService : ICloudStorageService
 {
 
-    private readonly ICloudStorage _repository;
+    private readonly ICloudStorageRepository _repository;
 
-    public CloudStorageService(ICloudStorage repository)
+    public CloudStorageService(ICloudStorageRepository repository)
     {
         _repository = repository;
     }

@@ -12,7 +12,7 @@ public class CloudStorageServiceTests
     public void AddFile_ShouldAdd_WhenFileDoesNotExist()
     {
         // Arrange
-        var repoMock = new Mock<ICloudStorage>();
+        var repoMock = new Mock<ICloudStorageRepository>();
         repoMock.Setup(r => r.GetFileByName("test.txt")).Returns((SystemFile)null);
 
         var service = new CloudStorageService(repoMock.Object);
@@ -31,7 +31,7 @@ public class CloudStorageServiceTests
     public void AddFile_ShouldThrow_WhenFileAlreadyExists()
     {
         // Arrange
-        var repoMock = new Mock<ICloudStorage>();
+        var repoMock = new Mock<ICloudStorageRepository>();
         repoMock.Setup(r => r.GetFileByName("test.txt"))
                 .Returns(new SystemFile("test.txt", 100));
 
@@ -46,7 +46,7 @@ public class CloudStorageServiceTests
     public void GetAllFiles_ShouldReturnList()
     {
         // Arrange
-        var repoMock = new Mock<ICloudStorage>();
+        var repoMock = new Mock<ICloudStorageRepository>();
         repoMock.Setup(r => r.GetAllFiles())
                 .Returns(new List<SystemFile> { new SystemFile("file1", 50) });
 
@@ -64,7 +64,7 @@ public class CloudStorageServiceTests
     public void GetFileByName_ShouldReturnFile_WhenExists()
     {
         // Arrange
-        var repoMock = new Mock<ICloudStorage>();
+        var repoMock = new Mock<ICloudStorageRepository>();
         repoMock.Setup(r => r.GetFileByName("file1"))
                 .Returns(new SystemFile("file1", 100));
 
@@ -83,7 +83,7 @@ public class CloudStorageServiceTests
     public void GetFileByName_ShouldReturnNull_WhenNotExists()
     {
         // Arrange
-        var repoMock = new Mock<ICloudStorage>();
+        var repoMock = new Mock<ICloudStorageRepository>();
         repoMock.Setup(r => r.GetFileByName("file1"))
                 .Returns((SystemFile?)null);
 
@@ -100,7 +100,7 @@ public class CloudStorageServiceTests
     public void Delete_ShouldReturnTrue_WhenFileExists()
     {
         // Arrange
-        var repoMock = new Mock<ICloudStorage>();
+        var repoMock = new Mock<ICloudStorageRepository>();
         repoMock.Setup(r => r.RemoveFile("file1")).Returns(true);
 
         var service = new CloudStorageService(repoMock.Object);
@@ -117,7 +117,7 @@ public class CloudStorageServiceTests
     public void Delete_ShouldReturnFalse_WhenFileDoesNotExist()
     {
         // Arrange
-        var repoMock = new Mock<ICloudStorage>();
+        var repoMock = new Mock<ICloudStorageRepository>();
         repoMock.Setup(r => r.RemoveFile("file1")).Returns(false);
 
         var service = new CloudStorageService(repoMock.Object);
@@ -135,7 +135,7 @@ public class CloudStorageServiceTests
     {
         // Arrange
         var largestFile = new SystemFile("bigfile.txt", 500);
-        var repoMock = new Mock<ICloudStorage>();
+        var repoMock = new Mock<ICloudStorageRepository>();
         repoMock.Setup(r => r.GetLargestFile()).Returns(largestFile);
 
         var service = new CloudStorageService(repoMock.Object);
@@ -154,7 +154,7 @@ public class CloudStorageServiceTests
     public void GetLargestFile_ShouldReturnNull_WhenNoFilesExist()
     {
         // Arrange
-        var repoMock = new Mock<ICloudStorage>();
+        var repoMock = new Mock<ICloudStorageRepository>();
         repoMock.Setup(r => r.GetLargestFile()).Returns((SystemFile?)null);
 
         var service = new CloudStorageService(repoMock.Object);

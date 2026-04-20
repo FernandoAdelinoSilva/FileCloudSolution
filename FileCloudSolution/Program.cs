@@ -15,8 +15,8 @@ builder.Services.AddSwaggerGen(options =>
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 });
 
-builder.Services.AddSingleton<CloudStorage>();
-builder.Services.AddSingleton<ICloudStorage, CloudStorage>();
+builder.Services.AddSingleton<CloudStorageRepository>();
+builder.Services.AddSingleton<ICloudStorageRepository, CloudStorageRepository>();
 builder.Services.AddScoped<ICloudStorageService, CloudStorageService>();
 
 var app = builder.Build();
