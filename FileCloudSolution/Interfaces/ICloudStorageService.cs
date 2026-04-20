@@ -3,7 +3,7 @@ using FileCloudSolution.Models;
 
 namespace FileCloudSolution.Interfaces;
 
-public interface ISystemFileService
+public interface ICloudStorageService
 {
     void AddFile(string fileName, int size);
     SystemFileDTO AddFile(SystemFileDTO systemFile);

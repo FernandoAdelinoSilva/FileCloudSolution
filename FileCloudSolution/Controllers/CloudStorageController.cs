@@ -7,29 +7,35 @@ namespace FileCloudSolution.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class CloudFilesController : Controller
+public class CloudStorageController : Controller
 {
-    private readonly ILogger<CloudFilesController> _logger;
-    private readonly ISystemFileService _systemFileService;
+    private readonly ILogger<CloudStorageController> _logger;
+    private readonly ICloudStorageService _cloudStorageService;
 
-    public CloudFilesController(ILogger<CloudFilesController> logger, ISystemFileService systemFileService)
+    public CloudStorageController(ILogger<CloudStorageController> logger, ICloudStorageService cloudStorageService)
     {
         _logger = logger;
-        _systemFileService = systemFileService;
+        _cloudStorageService = cloudStorageService;
     }
 
+    /// <summary>
+    /// Returns all files stored in the cloud storage.
+    /// </summary>
     [HttpGet(Name = "GetAllFiles")]
     public ActionResult<List<SystemFile>> Get()
     {
-        var files = _systemFileService.GetAllFiles();
+        var files = _cloudStorageService.GetAllFiles();
 
         return Ok(files);
     }
 
+    /// <summary>
+    /// Returns a file with the given name.
+    /// </summary>
     [HttpGet("{name}")]
     public ActionResult<List<SystemFile>> GetByName([FromRoute] string name)
     {
-        var file = _systemFileService.GetFileByName(name);
+        var file = _cloudStorageService.GetFileByName(name);
 
         if (file == null)
             return NotFound($"File '{name}' not found.");
@@ -37,10 +43,13 @@ public class CloudFilesController : Controller
         return Ok(file);
     }
 
+    /// <summary>
+    /// Returns the largest file inside the cloud storage.
+    /// </summary>
     [HttpGet("largest")]
     public ActionResult<SystemFile> GetLargestFile()
     {
-        var file = _systemFileService.GetLargestFile();
+        var file = _cloudStorageService.GetLargestFile();
 
         if (file == null)
             return NotFound("No files found.");
@@ -48,6 +57,9 @@ public class CloudFilesController : Controller
         return Ok(file);
     }
 
+    /// <summary>
+    /// Add new file.
+    /// </summary>
     [HttpPost(Name = "AddFile")]
     public ActionResult<SystemFileDTO> Add(SystemFileDTO systemFile)
     {
@@ -56,7 +68,7 @@ public class CloudFilesController : Controller
             return BadRequest("Please provide a valid File");
         }
 
-        var createdFile = _systemFileService.AddFile(systemFile);
+        var createdFile = _cloudStorageService.AddFile(systemFile);
 
         return CreatedAtAction(
             nameof(Get),
@@ -65,10 +77,13 @@ public class CloudFilesController : Controller
         );
     }
 
+    /// <summary>
+    /// Delete file.
+    /// </summary>
     [HttpDelete("{name}")]
     public ActionResult Delete ([FromRoute] string name)
     {
-        _systemFileService.Delete(name);
+        _cloudStorageService.Delete(name);
         return Ok();
     }
 }

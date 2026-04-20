@@ -6,16 +6,16 @@ using Moq;
 
 namespace FileCloudSolutionTests;
 
-public class SystemFileServiceTests
+public class CloudStorageServiceTests
 {
     [Fact]
     public void AddFile_ShouldAdd_WhenFileDoesNotExist()
     {
         // Arrange
-        var repoMock = new Mock<ISystemFiles>();
-        repoMock.Setup(r => r.GetByName("test.txt")).Returns((SystemFile)null);
+        var repoMock = new Mock<ICloudStorage>();
+        repoMock.Setup(r => r.GetFileByName("test.txt")).Returns((SystemFile)null);
 
-        var service = new SystemFileService(repoMock.Object);
+        var service = new CloudStorageService(repoMock.Object);
         var dto = new SystemFileDTO { Name = "test.txt", Size = 100 };
 
         // Act
@@ -24,18 +24,18 @@ public class SystemFileServiceTests
         // Assert
         Assert.Equal("test.txt", result.Name);
         Assert.Equal(100, result.Size);
-        repoMock.Verify(r => r.Add("test.txt", 100), Times.Once);
+        repoMock.Verify(r => r.AddFile("test.txt", 100), Times.Once);
     }
 
     [Fact]
     public void AddFile_ShouldThrow_WhenFileAlreadyExists()
     {
         // Arrange
-        var repoMock = new Mock<ISystemFiles>();
-        repoMock.Setup(r => r.GetByName("test.txt"))
+        var repoMock = new Mock<ICloudStorage>();
+        repoMock.Setup(r => r.GetFileByName("test.txt"))
                 .Returns(new SystemFile("test.txt", 100));
 
-        var service = new SystemFileService(repoMock.Object);
+        var service = new CloudStorageService(repoMock.Object);
         var dto = new SystemFileDTO { Name = "test.txt", Size = 200 };
 
         // Act & Assert
@@ -46,11 +46,11 @@ public class SystemFileServiceTests
     public void GetAllFiles_ShouldReturnList()
     {
         // Arrange
-        var repoMock = new Mock<ISystemFiles>();
-        repoMock.Setup(r => r.GetAll())
+        var repoMock = new Mock<ICloudStorage>();
+        repoMock.Setup(r => r.GetAllFiles())
                 .Returns(new List<SystemFile> { new SystemFile("file1", 50) });
 
-        var service = new SystemFileService(repoMock.Object);
+        var service = new CloudStorageService(repoMock.Object);
 
         // Act
         var files = service.GetAllFiles();
@@ -64,11 +64,11 @@ public class SystemFileServiceTests
     public void GetFileByName_ShouldReturnFile_WhenExists()
     {
         // Arrange
-        var repoMock = new Mock<ISystemFiles>();
-        repoMock.Setup(r => r.GetByName("file1"))
+        var repoMock = new Mock<ICloudStorage>();
+        repoMock.Setup(r => r.GetFileByName("file1"))
                 .Returns(new SystemFile("file1", 100));
 
-        var service = new SystemFileService(repoMock.Object);
+        var service = new CloudStorageService(repoMock.Object);
 
         // Act
         var result = service.GetFileByName("file1");
@@ -83,11 +83,11 @@ public class SystemFileServiceTests
     public void GetFileByName_ShouldReturnNull_WhenNotExists()
     {
         // Arrange
-        var repoMock = new Mock<ISystemFiles>();
-        repoMock.Setup(r => r.GetByName("file1"))
+        var repoMock = new Mock<ICloudStorage>();
+        repoMock.Setup(r => r.GetFileByName("file1"))
                 .Returns((SystemFile?)null);
 
-        var service = new SystemFileService(repoMock.Object);
+        var service = new CloudStorageService(repoMock.Object);
 
         // Act
         var result = service.GetFileByName("file1");
@@ -100,34 +100,34 @@ public class SystemFileServiceTests
     public void Delete_ShouldReturnTrue_WhenFileExists()
     {
         // Arrange
-        var repoMock = new Mock<ISystemFiles>();
-        repoMock.Setup(r => r.Remove("file1")).Returns(true);
+        var repoMock = new Mock<ICloudStorage>();
+        repoMock.Setup(r => r.RemoveFile("file1")).Returns(true);
 
-        var service = new SystemFileService(repoMock.Object);
+        var service = new CloudStorageService(repoMock.Object);
 
         // Act
         var result = service.Delete("file1");
 
         // Assert
         Assert.True(result);
-        repoMock.Verify(r => r.Remove("file1"), Times.Once);
+        repoMock.Verify(r => r.RemoveFile("file1"), Times.Once);
     }
 
     [Fact]
     public void Delete_ShouldReturnFalse_WhenFileDoesNotExist()
     {
         // Arrange
-        var repoMock = new Mock<ISystemFiles>();
-        repoMock.Setup(r => r.Remove("file1")).Returns(false);
+        var repoMock = new Mock<ICloudStorage>();
+        repoMock.Setup(r => r.RemoveFile("file1")).Returns(false);
 
-        var service = new SystemFileService(repoMock.Object);
+        var service = new CloudStorageService(repoMock.Object);
 
         // Act
         var result = service.Delete("file1");
 
         // Assert
         Assert.False(result);
-        repoMock.Verify(r => r.Remove("file1"), Times.Once);
+        repoMock.Verify(r => r.RemoveFile("file1"), Times.Once);
     }
 
     [Fact]
@@ -135,10 +135,10 @@ public class SystemFileServiceTests
     {
         // Arrange
         var largestFile = new SystemFile("bigfile.txt", 500);
-        var repoMock = new Mock<ISystemFiles>();
+        var repoMock = new Mock<ICloudStorage>();
         repoMock.Setup(r => r.GetLargestFile()).Returns(largestFile);
 
-        var service = new SystemFileService(repoMock.Object);
+        var service = new CloudStorageService(repoMock.Object);
 
         // Act
         var result = service.GetLargestFile();
@@ -154,10 +154,10 @@ public class SystemFileServiceTests
     public void GetLargestFile_ShouldReturnNull_WhenNoFilesExist()
     {
         // Arrange
-        var repoMock = new Mock<ISystemFiles>();
+        var repoMock = new Mock<ICloudStorage>();
         repoMock.Setup(r => r.GetLargestFile()).Returns((SystemFile?)null);
 
-        var service = new SystemFileService(repoMock.Object);
+        var service = new CloudStorageService(repoMock.Object);
 
         // Act
         var result = service.GetLargestFile();

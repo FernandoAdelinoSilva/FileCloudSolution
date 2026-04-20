@@ -4,39 +4,39 @@ using FileCloudSolution.Models;
 
 namespace FileCloudSolution.Services;
 
-public class SystemFileService : ISystemFileService
+public class CloudStorageService : ICloudStorageService
 {
 
-    private readonly ISystemFiles _repository;
+    private readonly ICloudStorage _repository;
 
-    public SystemFileService(ISystemFiles repository)
+    public CloudStorageService(ICloudStorage repository)
     {
         _repository = repository;
     }
 
     public void AddFile(string fileName, int size)
     {
-        _repository.Add(fileName, size);
+        _repository.AddFile(fileName, size);
     }
     public SystemFileDTO AddFile(SystemFileDTO systemFile)
     {
-        var file = _repository.GetByName(systemFile.Name);
+        var file = _repository.GetFileByName(systemFile.Name);
 
         if (file != null)
             throw new InvalidOperationException("File Already Exists");
 
-        _repository.Add(systemFile.Name, systemFile.Size);
+        _repository.AddFile(systemFile.Name, systemFile.Size);
         return systemFile;
     }
 
     public List<SystemFile> GetAllFiles()
     {
-        return _repository.GetAll();
+        return _repository.GetAllFiles();
     }
 
     public SystemFile? GetFileByName(string fileName)
     {
-        return _repository.GetByName(fileName);
+        return _repository.GetFileByName(fileName);
     }
 
     public SystemFile? GetLargestFile()
@@ -46,6 +46,6 @@ public class SystemFileService : ISystemFileService
 
     public bool Delete(string fileName)
     {
-        return _repository.Remove(fileName);
+        return _repository.RemoveFile(fileName);
     }
 }

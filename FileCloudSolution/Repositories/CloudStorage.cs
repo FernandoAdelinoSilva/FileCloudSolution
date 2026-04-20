@@ -4,17 +4,17 @@ using System.Drawing;
 
 namespace FileCloudSolution.Repositories;
 
-public class SystemFiles : ISystemFiles
+public class CloudStorage : ICloudStorage
 {
     private List<SystemFile> _systemFiles { get; set; } = new List<SystemFile>();
 
-    public void Add(string fileName, int size)
+    public void AddFile(string fileName, int size)
     {
         var file = new SystemFile(fileName, size);
         _systemFiles.Add(file);
     }
 
-    public bool Remove(string fileName)
+    public bool RemoveFile(string fileName)
     {
         var file = _systemFiles.FirstOrDefault(f => f.Name.Equals(fileName));
 
@@ -26,12 +26,12 @@ public class SystemFiles : ISystemFiles
         return false;
     }
 
-    public List<SystemFile> GetAll()
+    public List<SystemFile> GetAllFiles()
     {
         return _systemFiles;
     }
 
-    public SystemFile? GetByName(string fileName)
+    public SystemFile? GetFileByName(string fileName)
     {
         return _systemFiles.FirstOrDefault(f => f.Name.Equals(fileName));
     }
