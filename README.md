@@ -12,3 +12,14 @@ Level 2: the cloud storage sys should support displaying the largest file
 Level 3: the cloud storage system should support adding users with limited capacities and merging two users
 
 level 4: the cloud storage system should support backing up and restoring users files
+
+===========================================================================================
+
+Features - C# Backend API
+    - Endpoints with operations:
+        - Get All Files
+        - Get File By Name
+        - Add File - Validation if file already exists and throw exception
+    - Singleton Repository Files 
+    - Unit Tests to validate operations
+    - CICD - Build solution and run unit tests
