@@ -53,5 +53,12 @@ public class CloudFilesController : Controller
             createdFile
         );
     }
+
+    [HttpDelete("{name}")]
+    public ActionResult Delete ([FromRoute] string name)
+    {
+        _systemFileService.Delete(name);
+        return Ok();
+    }
 }
 

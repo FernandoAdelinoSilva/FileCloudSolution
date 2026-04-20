@@ -9,4 +9,5 @@ public interface ISystemFileService
     SystemFileDTO AddFile(SystemFileDTO systemFile);
     SystemFile? GetFileByName(string fileName);
     List<SystemFile> GetAllFiles();
+    bool Delete(string fileName);
 }

@@ -95,4 +95,38 @@ public class SystemFileServiceTests
         // Assert
         Assert.Null(result);
     }
+
+    [Fact]
+    public void Delete_ShouldReturnTrue_WhenFileExists()
+    {
+        // Arrange
+        var repoMock = new Mock<ISystemFiles>();
+        repoMock.Setup(r => r.Remove("file1")).Returns(true);
+
+        var service = new SystemFileService(repoMock.Object);
+
+        // Act
+        var result = service.Delete("file1");
+
+        // Assert
+        Assert.True(result);
+        repoMock.Verify(r => r.Remove("file1"), Times.Once);
+    }
+
+    [Fact]
+    public void Delete_ShouldReturnFalse_WhenFileDoesNotExist()
+    {
+        // Arrange
+        var repoMock = new Mock<ISystemFiles>();
+        repoMock.Setup(r => r.Remove("file1")).Returns(false);
+
+        var service = new SystemFileService(repoMock.Object);
+
+        // Act
+        var result = service.Delete("file1");
+
+        // Assert
+        Assert.False(result);
+        repoMock.Verify(r => r.Remove("file1"), Times.Once);
+    }
 }

@@ -38,4 +38,9 @@ public class SystemFileService : ISystemFileService
     {
         return _repository.GetByName(fileName);
     }
+
+    public bool Delete(string fileName)
+    {
+        return _repository.Remove(fileName);
+    }
 }
