@@ -57,5 +57,15 @@ public class UserController : Controller
         _userService.RemoveUser(name);
         return Ok();
     }
+
+    /// <summary>
+    /// Add file to user.
+    /// </summary>
+    [HttpPost("{userName}/files")]
+    public ActionResult<UserDTO> AddFile([FromRoute] string userName, SystemFileDTO fileDTO)
+    {
+        var createdFile = _userService.AddFileToUser(userName, fileDTO);
+        return Ok();
+    }
 }
 

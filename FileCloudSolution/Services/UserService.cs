@@ -29,4 +29,18 @@ public class UserService : IUserService
     {
         return _repository.RemoveUser(name);
     }
+
+    public bool AddFileToUser(string userName, SystemFileDTO file)
+    {
+        var user = _repository.GetAllUsers().FirstOrDefault(u => u.Name == userName);
+        if (user == null) return false;
+        
+        var storageSize = user.CloudStorage.GetAllFiles().Sum(f => f.Size);
+
+        if ((storageSize + file.Size) > user.Capacity)
+            throw new InvalidOperationException("Capacity exceeded, please delete a file to continue");
+
+        user.CloudStorage.AddFile(file.Name, file.Size);
+        return true;
+    }
 }
