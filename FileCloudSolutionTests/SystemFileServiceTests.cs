@@ -59,4 +59,40 @@ public class SystemFileServiceTests
         Assert.Single(files);
         Assert.Equal("file1", files[0].Name);
     }
+
+    [Fact]
+    public void GetFileByName_ShouldReturnFile_WhenExists()
+    {
+        // Arrange
+        var repoMock = new Mock<ISystemFiles>();
+        repoMock.Setup(r => r.GetByName("file1"))
+                .Returns(new SystemFile("file1", 100));
+
+        var service = new SystemFileService(repoMock.Object);
+
+        // Act
+        var result = service.GetFileByName("file1");
+
+        // Assert
+        Assert.NotNull(result);
+        Assert.Equal("file1", result.Name);
+        Assert.Equal(100, result.Size);
+    }
+
+    [Fact]
+    public void GetFileByName_ShouldReturnNull_WhenNotExists()
+    {
+        // Arrange
+        var repoMock = new Mock<ISystemFiles>();
+        repoMock.Setup(r => r.GetByName("file1"))
+                .Returns((SystemFile?)null);
+
+        var service = new SystemFileService(repoMock.Object);
+
+        // Act
+        var result = service.GetFileByName("file1");
+
+        // Assert
+        Assert.Null(result);
+    }
 }
