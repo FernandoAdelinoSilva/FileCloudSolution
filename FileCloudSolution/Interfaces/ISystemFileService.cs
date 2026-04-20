@@ -7,5 +7,6 @@ public interface ISystemFileService
 {
     void AddFile(string fileName, int size);
     SystemFileDTO AddFile(SystemFileDTO systemFile);
+    SystemFile? GetFileByName(string fileName);
     List<SystemFile> GetAllFiles();
 }

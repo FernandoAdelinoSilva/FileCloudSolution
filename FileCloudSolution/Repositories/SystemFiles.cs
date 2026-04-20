@@ -30,7 +30,7 @@ public class SystemFiles
         return _systemFiles;
     }
 
-    public SystemFile GetByName(string fileName)
+    public SystemFile? GetByName(string fileName)
     {
         return _systemFiles.FirstOrDefault(f => f.Name.Equals(fileName));
     }
